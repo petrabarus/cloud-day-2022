@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - docker pull owasp/zap2docker-stable 
+  build:
+    commands:
+      - |
+        docker run -t owasp/zap2docker-stable \
+          zap-baseline.py \
+          -t $STAGING_SITE_URL || true

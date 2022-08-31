@@ -25,8 +25,9 @@ resource "aws_ecs_task_definition" "task_definition" {
 
   container_definitions = jsonencode([
     {
-      name        = "application"
-      image       = "${var.repository_url}:latest"
+      name = "app"
+      //image       = "${var.repository_url}:latest"
+      image       = "tutum/hello-world:latest"
       cpu         = local.cpu_size
       memory      = local.memory_size
       networkMode = "awsvpc"
@@ -73,7 +74,7 @@ resource "aws_ecs_service" "service" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.main_load_balancer_target_group.arn
-    container_name   = local.app_port
+    container_name   = "app"
     container_port   = local.app_port
   }
 

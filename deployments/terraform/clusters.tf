@@ -2,10 +2,10 @@
 locals {
   clusters = {
     staging = {
-        environment = "staging"
+      environment = "staging"
     }
     production = {
-        environment = "production"
+      environment = "production"
     }
   }
 }
@@ -20,7 +20,7 @@ module "cluster" {
   source   = "./module/cluster"
 
   name           = "${local.name}-${each.key}"
-  environment = each.value.environment
+  environment    = each.value.environment
   vpc_id         = aws_vpc.main.id
   public_subnets = aws_subnet.public
   repository_url = aws_ecr_repository.container_repository.repository_url

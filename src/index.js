@@ -10,7 +10,7 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 const app = express();
 app.get('/', (req, res) => {
   res.send(`Hello World on ${NODE_ENV}`);
-  console.log(`Request received on ${NODE_ENV}: ${req.url}`);
+  console.log(`Request received on ${NODE_ENV}: ${req.url} by ${req.get('user-agent')} from ${req.ip}`);
 });
 
 app.listen(PORT, HOST);

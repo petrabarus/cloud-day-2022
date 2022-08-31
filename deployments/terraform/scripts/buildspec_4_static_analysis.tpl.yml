@@ -1,0 +1,22 @@
+version: 0.2
+
+env:
+  variables:
+    SONAR_VERSION: "4.7.0.2747-linux"
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_VERSION.zip
+      - unzip sonar-scanner-cli-$SONAR_VERSION.zip
+      - export PATH=$PATH:./sonar-scanner-$SONAR_VERSION/bin/
+  build:
+    commands:
+      - |
+        sonar-scanner \
+        -X \
+        -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+        -Dsonar.sources=. \
+        -Dsonar.host.url=$SONAR_HOST_URL \
+        -Dsonar.login=$SONAR_LOGIN
